@@ -1,27 +1,30 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
 import React from 'react'
 import { useAssets } from 'expo-asset'
 import { ResizeMode, Video } from 'expo-av'
 import { Link } from 'expo-router'
 import { defaultStyles } from '@/constants/Styles'
 import Colors from '@/constants/Colors'
+import { StatusBar } from 'expo-status-bar'
 
 const Page = () => {
  const [assets] = useAssets([require('@/assets/videos/ocean.mp4')])
 
   return (
+    <ImageBackground 
+    source={require('@/assets/images/research-welcome.jpg')}
+    style={styles.backgroundImage}>
+    <StatusBar style='light'/>
     <View style={styles.container}>
-      {assets && (
-        <Video
-        resizeMode={ResizeMode.COVER}
-        isMuted
-        isLooping
-        shouldPlay 
-        source={{uri: assets[0].uri }} style={styles.video}/> 
-        )} 
-        <View style={{marginTop: 80, padding: 20 }}>
+
+     
+     
+        <View style={{marginTop: 200, padding: 20 }}>
             <Text style={styles.header}>
-                Research in seconds
+                Research in seconds,
+                </Text>
+                <Text style={styles.description}>
+                Get Companys insights and latest news.
                 </Text>
         </View>
 
@@ -37,13 +40,17 @@ const Page = () => {
             </TouchableOpacity>
             </Link>
         </View>
+ 
     </View>
+    </ImageBackground>
+
   )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        height: "100%",
         justifyContent: "space-between",
     },
     video: {
@@ -53,11 +60,18 @@ const styles = StyleSheet.create({
         
         },
     header: {
+        
      color: "white",
      fontWeight: "700",
-     fontSize: 36,
+     fontSize: 56,
 
     },
+    description: {
+        fontSize: 24,
+        color: "white",
+        
+    },
+
     button: { 
         color: "white",
         flexDirection: "row",
@@ -66,6 +80,11 @@ const styles = StyleSheet.create({
         marginBottom: 60,
         padding: 5,
 
+    },
+    backgroundImage: {
+      width: "100%",
+      height: "100%",
+      position: 'absolute',
     }
 })
 
